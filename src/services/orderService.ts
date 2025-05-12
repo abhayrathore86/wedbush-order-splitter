@@ -1,15 +1,11 @@
 import dayjs from "dayjs";
 import { v4 as uuidv4 } from "uuid";
 import { DECIMAL_PRECISION, DEFAULT_PRICE } from "../utils/config";
-import { OrderRequest, OrderResponse } from "../models/types";
+import { OrderRequest, OrderResponse } from "../models/models";
+import { getNextMarketDate } from "../utils/comman";
+
 
 const orders: OrderResponse[] = [];
-
-export function getNextMarketDate(): string {
-  let date = dayjs();
-  while (date.day() === 0 || date.day() === 6) {}
-  return date.format("YYYY-MM-DD");
-}
 
 export function createOrder(data: OrderRequest): OrderResponse {
   const { portfolio, totalAmount, type } = data;
